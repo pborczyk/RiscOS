@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "future": "c",
+        "istream": "c",
+        "ostream": "c",
+        "system_error": "c",
+        "memory.h": "c"
+    }
+}
