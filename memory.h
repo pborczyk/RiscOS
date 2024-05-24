@@ -11,7 +11,7 @@ void init_allocator();
 struct memory_chunk* extend_to_size(struct memory_chunk* chunk_to_extend, size_t target_size);
 //Cuts to size by splitting chunk into two
 struct memory_chunk* cut_to_size(struct memory_chunk* chunk_to_cut, size_t target_size);
-
+void* get_usable_memory_pointer(struct memory_chunk* chunk);
 enum STATUS {
     FREE,
     USED

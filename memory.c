@@ -14,6 +14,20 @@ void init_allocator() {
     first_free_memory_chunk->last = NULL;
 }
 
+struct memory_chunk *request_chunk(size_t size) {
+     if (size > first_free_memory_chunk->chunk_size)
+    {
+        struct memory_chunk* extended_chunk = extend_to_size(first_free_memory_chunk, size);
+        extended_chunk->allocated_memory = size;
+        return get_usable_memory_pointer(extended_chunk);
+    } else if (size < first_free_memory_chunk->chunk_size)
+    {
+        //TODO split chunks to be smaller if needed
+        
+    }
+}
+
+
 //TODO: align to memory layout
 //clear memory(who cares)
 struct memory_chunk *extend_to_size(struct memory_chunk* chunk_to_extend, size_t target_size)
@@ -45,6 +59,6 @@ struct memory_chunk* cut_to_size(struct memory_chunk *chunk_to_cut, size_t targe
         
 }
 
-void* get_memory_pointer(struct memory_chunk* chunk) {
+void* get_usable_memory_pointer(struct memory_chunk* chunk) {
     return (void*)(chunk + sizeof(struct memory_chunk));
 }

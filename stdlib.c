@@ -31,7 +31,7 @@ char* itoa(int value, char* str, int base) {
         str_pos++;
     }
     str[str_pos] = '\0';
-    strrev(str);
+   // strrev(str);
     return str;
 }
 
@@ -64,21 +64,20 @@ void printf(char* format, ...) {
                     print(string);
                     break;
                 case '%':
-                    putchar("%");
+                    putchar('%');
                     break;
                 default:
                     break;
-            }  
+            }
+            formatting_mode = 0;
         } else {
              if (format[format_pos] == '%') {
             formatting_mode = 1;
-            format_pos++;
             } else {
                 putchar(format[format_pos]);
-                format_pos++;
             }
         }
-        
+        format_pos++;
     }
     va_end(argp);
 }
