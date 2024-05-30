@@ -62,3 +62,24 @@ struct memory_chunk* cut_to_size(struct memory_chunk *chunk_to_cut, size_t targe
 void* get_usable_memory_pointer(struct memory_chunk* chunk) {
     return (void*)(chunk + sizeof(struct memory_chunk));
 }
+
+// void *malloc(size_t size) {
+   
+    
+    
+// }
+
+// void free(void * ptr){
+
+// }
+
+// void *calloc(size_t nmemb, size_t size){
+
+// }
+
+// void *realloc(void * ptr, size_t size) {
+
+// }
+// void *reallocarray(void * ptr, size_t nmemb, size_t size) {
+    
+// }

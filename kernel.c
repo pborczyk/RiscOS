@@ -5,7 +5,7 @@
  
 void kmain(void) {
 
-	printf("Hello world! %d", 12);
+	printf("Hello world! %d", 13);
 
 	//printf("Hello world! %d before \r\n after", 12);
 	return;
