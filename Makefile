@@ -1,3 +1,5 @@
+run: compile
+	qemu-system-riscv64 -machine virt -bios none -kernel kernel.elf -serial mon:stdio
 compile: entry kernel memory string stdlib
 	riscv64-unknown-elf-gcc -T linker.ld -lgcc -nostdlib kernel.o entry.o memory.o string.o stdlib.o -o kernel.elf
 entry: entry.asm
