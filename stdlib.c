@@ -31,7 +31,7 @@ char* itoa(int value, char* str, int base) {
         str_pos++;
     }
     str[str_pos] = '\0';
-   // strrev(str);
+    strrev(str);
     return str;
 }
 
@@ -41,7 +41,7 @@ void printf(char* format, ...) {
     char buf[512];
     int format_pos = 0;
     int formatting_mode = 0;
-    while (*format != '\0') {
+    while (format[format_pos] != '\0') {
         if (formatting_mode)
         {
             switch (format[format_pos])
@@ -53,10 +53,10 @@ void printf(char* format, ...) {
                     print(buf);
                     break;
                 case 'f':
-                    va_arg(argp, float);
+                    va_arg(argp, double);
                     break;
                 case 'c':
-                    int character = va_arg(argp, char);
+                    int character = va_arg(argp, int);
                     putchar(character);
                     break;
                 case 's':
@@ -83,23 +83,23 @@ void printf(char* format, ...) {
 }
 
 
-void *malloc(size_t size) {
+// void *malloc(size_t size) {
    
     
     
-}
+// }
 
-void free(void * ptr){
+// void free(void * ptr){
 
-}
+// }
 
-void *calloc(size_t nmemb, size_t size){
+// void *calloc(size_t nmemb, size_t size){
 
-}
+// }
 
-void *realloc(void * ptr, size_t size) {
+// void *realloc(void * ptr, size_t size) {
 
-}
-void *reallocarray(void * ptr, size_t nmemb, size_t size) {
+// }
+// void *reallocarray(void * ptr, size_t nmemb, size_t size) {
     
-}
+// }
