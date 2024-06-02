@@ -6,6 +6,8 @@
         "system_error": "c",
         "memory.h": "c",
         "stddef.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "sbi_types.h": "c",
+        "sbi_init.h": "c"
     }
 }
