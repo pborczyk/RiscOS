@@ -1,16 +1,17 @@
-CC = riscv64-unknown-elf-gcc
-LINKER = riscv64-unknown-elf-gcc
-ASM = riscv64-unknown-elf-as
-OBJCOPY=riscv64-unknown-elf-objcopy
+CROSS_COMPILE = riscv64-elf
+CC = ${CROSS_COMPILE}-gcc
+LINKER = ${CROSS_COMPILE}-gcc
+ASM = ${CROSS_COMPILE}-as
+OBJCOPY=${CROSS_COMPILE}-objcopy
 TFTP_DIR=~/srv/tfp/
 BUILD_DIR=build
 
 
-SBI_INCLUDE = ./libs/sbi/include/
+SBI_INCLUDE = ./opensbi/include/
 INCLUDES = ../ $(SBI_INCLUDE)
 
 INCLUDE_STRING = $(foreach include, $(INCLUDES), -I $(include))
-U_BOOT_PATH = /home/howorang/uboot/u-boot/u-boot.bin
+U_BOOT_PATH = bin/u-boot.bin
 
 run: compile ./build/kernel.elf
 	qemu-system-riscv64 -machine virt -kernel $(U_BOOT_PATH) -serial mon:stdio -netdev user,id=n0,tftp=./${BUILD_DIR},bootfile=kernel.bin -device virtio-net-device,netdev=n0
