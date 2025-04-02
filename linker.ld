@@ -1,24 +1,26 @@
-ENTRY(start)
-phys = 0x00010000;
-SECTIONS
-{
-  .text phys : AT(phys) {
-    code = .;
-    *(.text)
-    *(.rodata)
-    . = ALIGN(4096);
-  }
-  .data : AT(phys + (data - code))
-  {
-    data = .;
-    *(.data)
-    . = ALIGN(4096);
-  }
-  .bss : AT(phys + (bss - code))
-  {
-    bss = .;
-    *(.bss)
-    . = ALIGN(4096);
-  }
-  end = .;
+ENTRY(start);
+ 
+. =0x00000000;
+ 
+SECTIONS {
+	/* Include entry point at start of binary */
+	.text : ALIGN(4K) {
+		*(.init);
+		*(.text);
+	}
+	.bss : ALIGN(4K) {
+		PROVIDE(bss_start = .);
+		*(.bss);
+		. += 4096;
+		PROVIDE(stack_top = .);
+		. += 4096;
+		PROVIDE(global_pointer = .);
+		PROVIDE(bss_end = .);
+	}
+	.rodata : ALIGN(4K) {
+		*(.rodata);
+	}
+	.data : ALIGN(4K) {
+		*(.data);
+	}
 }

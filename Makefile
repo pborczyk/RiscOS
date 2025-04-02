@@ -1,4 +1,4 @@
-CROSS_COMPILE = riscv64-elf
+CROSS_COMPILE = riscv64-unknown-elf
 CC = ${CROSS_COMPILE}-gcc
 LINKER = ${CROSS_COMPILE}-gcc
 ASM = ${CROSS_COMPILE}-as
@@ -14,7 +14,12 @@ INCLUDE_STRING = $(foreach include, $(INCLUDES), -I $(include))
 U_BOOT_PATH = bin/u-boot.bin
 
 run: compile ./build/kernel.elf
-	qemu-system-riscv64 -machine virt -kernel $(U_BOOT_PATH) -serial mon:stdio -netdev user,id=n0,tftp=./${BUILD_DIR},bootfile=kernel.bin -device virtio-net-device,netdev=n0
+	qemu-system-riscv64 -M virt \
+    -display none -serial stdio \
+    -bios bin/u-boot-spl.bin \
+    -device loader,file=bin/u-boot.itb,addr=0x80200000 \
+	-netdev user,id=n0,tftp=./${BUILD_DIR},bootfile=kernel.bin -device virtio-net-device,netdev=n0
+
 compile: entry kernel memory string stdlib
 	cd ${BUILD_DIR} && \
 	${LINKER} $(INCLUDE_STRING) -T ../linker.ld -lgcc -nostdlib kernel.o entry.o memory.o string.o stdlib.o -o kernel.elf && \
