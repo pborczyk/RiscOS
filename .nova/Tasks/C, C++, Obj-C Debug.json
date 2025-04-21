@@ -1,0 +1,34 @@
+{
+  "actions" : {
+    "build" : {
+      "postActions" : [
+        {
+          "script" : "cmake --trace --debug-find -DCMAKE_TOOLCHAIN_FILE=.\/riscv64.cmake  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -S .\/ -B .\/build\nmake -C .\/build",
+          "type" : "runScript"
+        }
+      ]
+    },
+    "clean" : {
+      "postActions" : [
+        {
+          "script" : "rm -rf .\/build",
+          "type" : "runScript"
+        }
+      ]
+    },
+    "run" : {
+      "postActions" : [
+        {
+          "script" : "qemu-system-riscv64 -M virt \\\n -display none -serial stdio \\\n -bios bin\/u-boot-spl.bin \\\n -device loader,file=bin\/u-boot.itb,addr=0x80200000 \\\n -netdev user,id=n0,tftp=.\/${BUILD_DIR},bootfile=.\/build\/kernel.bin -device virtio-net-device,netdev=n0",
+          "type" : "runScript"
+        }
+      ]
+    }
+  },
+  "buildBeforeRunning" : true,
+  "extension" : {
+    "identifier" : "tech.staysail.ClangD",
+    "name" : "C-Dragon"
+  },
+  "extensionTemplate" : "localDebug"
+}

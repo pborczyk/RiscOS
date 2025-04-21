@@ -1,0 +1,6 @@
+[
+    {
+        "name": "RISCV Bare metal",
+        "toolchainFile": "${workspaceFolder}/riscv64.cmake"
+    }
+]

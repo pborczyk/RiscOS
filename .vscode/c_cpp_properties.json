@@ -3,13 +3,25 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**", "/usr/include/**"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "linux-clang-x64",
+            "intelliSenseMode": "linux-gcc-arm64",
             "configurationProvider": "ms-vscode.cpptools"
+        },
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/Users/howorang/Projects/RiscOSEnv/include"
+            ],
+            "defines": [],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-gcc-arm64",
+            "configurationProvider": "ms-vscode.cpptools",
         }
     ],
     "version": 4

@@ -8,6 +8,9 @@
         "stddef.h": "c",
         "stdint.h": "c",
         "sbi_types.h": "c",
-        "sbi_init.h": "c"
-    }
+        "sbi_init.h": "c",
+        "sbi_version.h": "c"
+    },
+    "C_Cpp.default.intelliSenseMode": "gcc-arm",
+    "C_Cpp.default.mergeConfigurations": false
 }
