@@ -1,5 +1,4 @@
 #include "stdlib.h"
-#include "memory.h"
 #include "string.h"
 
 unsigned char *uart = (unsigned char *)0x10000000;
@@ -39,12 +38,15 @@ void printf(char *format, ...) {
   char buf[512];
   int format_pos = 0;
   int formatting_mode = 0;
+  int num;
+  int character;
+  char* string;
   while (format[format_pos] != '\0') {
     if (formatting_mode) {
       switch (format[format_pos]) {
       case 'd':
       case 'i':
-        int num = va_arg(argp, int);
+        num = va_arg(argp, int);
         itoa(num, buf, 10);
         print(buf);
         break;
@@ -52,11 +54,11 @@ void printf(char *format, ...) {
         va_arg(argp, double);
         break;
       case 'c':
-        int character = va_arg(argp, int);
+        character = va_arg(argp, int);
         putchar(character);
         break;
       case 's':
-        char *string = va_arg(argp, char *);
+        string = va_arg(argp, char *);
         print(string);
         break;
       case '%':
