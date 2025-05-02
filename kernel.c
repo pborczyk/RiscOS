@@ -3,10 +3,12 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <sbi/sbi_version.h>
+#include "csr.h"
 
 void kmain(void) {
 
   printf("Hello world! %d", 13);
-  // printf("Hello world! %d before \r\n after", 12);
-  return;
+  unsigned long time;
+  time = read_csr(CSR_TIME);
+  printf("Time: %d", time);
 }

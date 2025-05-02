@@ -18,7 +18,7 @@ set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/linker.ld")
 add_link_options(-T "${LINKER_SCRIPT}" -lgcc -nostdlib)
 add_executable(Kernel kernel.c)
 set_target_properties(Kernel PROPERTIES LINK_DEPENDS "${LINKER_SCRIPT}")
-target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule ${SBI})
+target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule)
 add_custom_command(TARGET Kernel 
                    POST_BUILD
                    COMMAND "${CMAKE_OBJCOPY}"
