@@ -11,6 +11,7 @@ endif()
 
 
 add_library(EntryPoint		OBJECT entry.asm)
+add_compile_options($<$<COMPILE_LANGUAGE:C>:"-Wall -Wextra -mcmodel=medany">)
 add_library(MemoryModule	OBJECT memory.h memory.c)
 add_library(StdLibModule	OBJECT stdlib.h stdlib.c string.h string.c)
 
