@@ -1,26 +1,11 @@
-ENTRY(start);
- 
-. =0x00000000;
- 
+ENTRY(_start)
 SECTIONS {
-	/* Include entry point at start of binary */
-	.text : ALIGN(4K) {
-		*(.init);
-		*(.text);
-	}
-	.bss : ALIGN(4K) {
-		PROVIDE(bss_start = .);
-		*(.bss);
-		. += 4096;
-		PROVIDE(stack_top = .);
-		. += 4096;
-		PROVIDE(global_pointer = .);
-		PROVIDE(bss_end = .);
-	}
-	.rodata : ALIGN(4K) {
-		*(.rodata);
-	}
-	.data : ALIGN(4K) {
-		*(.data);
-	}
+    . = 0x40100000; /* RAM starts at 0x40000000 but if we ask to load the kernel there, QEMU will not load a DTB */
+    .startup . : { *entry.asm.obj(.text) }
+    .text : { *(.text) }
+    .data : { *(.data) }
+    .bss : { *(.bss COMMON) }
+    . = ALIGN(16); /* two times pointer size */
+    . += 0x1000; /* 4kB of stack memory */ 
+    stack_top = .;
 }

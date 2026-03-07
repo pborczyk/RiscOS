@@ -1,7 +1,7 @@
 #include "stdlib.h"
 #include "string.h"
 
-unsigned char *uart = (unsigned char *)0x10000000;
+volatile uint8_t *uart = (uint8_t *) 0x09000000;
 void putchar(char c) {
   *uart = c;
   return;
@@ -32,9 +32,9 @@ char *itoa(int value, char *str, int base) {
   return str;
 }
 
-void printf(char *format, ...) {
-  va_list argp;
-  va_start(argp, format);
+void printf(const char *format, ...) {
+  __builtin_va_list argp;
+  __builtin_va_start(argp, format);
   char buf[512];
   int format_pos = 0;
   int formatting_mode = 0;
@@ -46,19 +46,19 @@ void printf(char *format, ...) {
       switch (format[format_pos]) {
       case 'd':
       case 'i':
-        num = va_arg(argp, int);
+        num = __builtin_va_arg(argp, int);
         itoa(num, buf, 10);
         print(buf);
         break;
-      case 'f':
-        va_arg(argp, double);
-        break;
+      // case 'f':
+      //   __builtin_va_arg(argp, double);
+      //   break;
       case 'c':
-        character = va_arg(argp, int);
+        character = __builtin_va_arg(argp, int);
         putchar(character);
         break;
       case 's':
-        string = va_arg(argp, char *);
+        string = __builtin_va_arg(argp, char *);
         print(string);
         break;
       case '%':
@@ -77,5 +77,5 @@ void printf(char *format, ...) {
     }
     format_pos++;
   }
-  va_end(argp);
+  __builtin_va_end(argp);
 }
