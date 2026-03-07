@@ -11,7 +11,7 @@ project(RiscOS 	VERSION 0.1
 include_directories(${CMAKE_INCLUDE_PATH})
 
 add_library(EntryPoint		OBJECT entry.asm)
-# this disables float support across the codebase, we have to do it because it is broken before kernel inits the FPU
+# this disables float support across the codebase, we have to do it because it is broken before kernel inits the FPU see: https://forum.osdev.org/viewtopic.php?t=56542
 add_compile_options(-ffreestanding -c -g -nostdlib -mstrict-align -mgeneral-regs-only)
 add_library(MemoryModule	OBJECT memory.h memory.c)
 add_library(StdLibModule	OBJECT stdlib.h stdlib.c string.h string.c)
