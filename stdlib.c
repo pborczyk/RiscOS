@@ -32,6 +32,23 @@ char *itoa(int value, char *str, int base) {
   return str;
 }
 
+char *utoa(unsigned int value, char *str, int base) {
+  char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
+                     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  if (base > 16) {
+    return NULL;
+  }
+  int str_pos = 0;
+  while (value > 0) {
+    str[str_pos] = digits[value % base];
+    value = value / base;
+    str_pos++;
+  }
+  str[str_pos] = '\0';
+  strrev(str);
+  return str;
+}
+
 void printf(const char *format, ...) {
   __builtin_va_list argp;
   __builtin_va_start(argp, format);
@@ -60,6 +77,11 @@ void printf(const char *format, ...) {
       case 's':
         string = __builtin_va_arg(argp, char *);
         print(string);
+        break;
+      case 'x':
+        num = __builtin_va_arg(argp, uint32_t);
+        utoa(num, buf, 16);
+        print(buf);
         break;
       case '%':
         putchar('%');

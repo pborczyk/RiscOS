@@ -18,7 +18,7 @@ add_library(StdLibModule	OBJECT stdlib.h stdlib.c string.h string.c)
 
 set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/linker.ld")
 add_link_options(-T "${LINKER_SCRIPT}" -nostdlib)
-add_executable(Kernel kernel.c)
+add_executable(Kernel kernel.c fdt.h fdt.c)
 set_target_properties(Kernel PROPERTIES LINK_DEPENDS "${LINKER_SCRIPT}" OUTPUT_NAME "Kernel.elf")
 target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule)
 
