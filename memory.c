@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include "memory.h"
+#include "stdlib.h"
 
 void* DRAM_START = (void*)0x80000000;
 
