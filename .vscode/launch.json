@@ -12,10 +12,13 @@
             "target": "127.0.0.1:1234",
             "remote": true,
             "cwd": "${workspaceRoot}",
-            "gdbpath": "/home/howorang/SDKs/aarch64-none-elf/bin/aarch64-none-elf-gdb",
-            "autorun": [
-                
-            ]
+            "linux": {
+                "gdbpath": "/home/howorang/SDKs/aarch64-none-elf/bin/aarch64-none-elf-gdb"
+            },
+            "osx": {
+                "gdbpath": "aarch64-elf-gdb"
+            },
+            "preLaunchTask": "Run QEMU"
         }
     ]
 }

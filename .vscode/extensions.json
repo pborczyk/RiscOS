@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "webfreak.debug",
+    "ms-vscode.cmake-tools",
+    "ms-vscode.cpptools-extension-pack"
+  ]
+}
