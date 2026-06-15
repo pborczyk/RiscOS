@@ -1,4 +1,10 @@
-set(CMAKE_TOOLCHAIN_FILE ./aarch64-elf.cmake)
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/aarch64-elf-darwin.cmake")
+elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/aarch64-elf-linux.cmake")
+else()
+    message(FATAL_ERROR "Unsupported host OS: ${CMAKE_HOST_SYSTEM_NAME}")
+endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # otherwise cmake built in compiler test will fail on cross compiler
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)

@@ -1,0 +1,24 @@
+# set up cross compiling
+set(CMAKE_SYSTEM_NAME	  Generic)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+
+set(TOOLCHAIN_PREFIX    aarch64-elf-)
+set(COMPILER_DIRECTORY /opt/homebrew/opt/aarch64-elf-gcc/bin/)
+set(BINUTILS_DIRECTORY /opt/homebrew/opt/aarch64-elf-binutils/bin/)
+
+set(CMAKE_C_COMPILER    "${TOOLCHAIN_DIRECTORY}${TOOLCHAIN_PREFIX}gcc")
+set(CMAKE_CXX_COMPILER	"${TOOLCHAIN_DIRECTORY}${TOOLCHAIN_PREFIX}g++")
+set(CMAKE_ASM_COMPILER	"${BINUTILS_DIRECTORY}${TOOLCHAIN_PREFIX}as")
+set(CMAKE_LINKER        "${BINUTILS_DIRECTORY}${TOOLCHAIN_PREFIX}ld")
+set(CMAKE_OBJCOPY       "${BINUTILS_DIRECTORY}${TOOLCHAIN_PREFIX}objcopy")
+
+set(CROSSCOMPILING_EMULATOR qemu-system-aarch64)
+
+# search headers and libraries in the target environment
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+file(GLOB CMAKE_INCLUDE_PATH "/opt/homebrew/lib/gcc/aarch64-elf/*/include")
+list(GET CMAKE_INCLUDE_PATH 0 CMAKE_INCLUDE_PATH)
+message(STATUS "CMAKE_INCLUDE_PATH was resolved to ${CMAKE_INCLUDE_PATH}")

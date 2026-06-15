@@ -18,4 +18,6 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-set(CMAKE_INCLUDE_PATH /home/howorang/tools/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-elf/include)
+file(GLOB CMAKE_INCLUDE_PATH "/home/howorang/tools/arm-gnu-toolchain-*-x86_64-aarch64-none-elf/include")
+list(GET CMAKE_INCLUDE_PATH 0 CMAKE_INCLUDE_PATH)
+message(STATUS "CMAKE_INCLUDE_PATH was resolved to $CMAKE_INCLUDE_PATH")
