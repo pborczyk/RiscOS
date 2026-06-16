@@ -3,7 +3,7 @@ set(CMAKE_SYSTEM_NAME	  Generic)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(TOOLCHAIN_PREFIX    aarch64-none-elf-)
-set(TOOLCHAIN_DIRECTORY /home/howorang/tools/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-elf/bin/)
+set(TOOLCHAIN_DIRECTORY /home/howorang/SDKs/aarch64-none-elf/bin/)
 
 set(CMAKE_C_COMPILER    "${TOOLCHAIN_DIRECTORY}${TOOLCHAIN_PREFIX}gcc")
 set(CMAKE_CXX_COMPILER	"${TOOLCHAIN_DIRECTORY}${TOOLCHAIN_PREFIX}g++")
@@ -18,6 +18,6 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-file(GLOB CMAKE_INCLUDE_PATH "/home/howorang/tools/arm-gnu-toolchain-*-x86_64-aarch64-none-elf/include")
+file(GLOB CMAKE_INCLUDE_PATH "/home/howorang/SDKs/aarch64-none-elf/lib/gcc/aarch64-none-elf/*/include")
 list(GET CMAKE_INCLUDE_PATH 0 CMAKE_INCLUDE_PATH)
 message(STATUS "CMAKE_INCLUDE_PATH was resolved to $CMAKE_INCLUDE_PATH")

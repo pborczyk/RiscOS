@@ -1,6 +1,11 @@
-#include <stdint.h>
+#ifndef FDT_H
+#define FDT_H
 
-struct fdt_header {
+#include <stdint.h>
+#include <stdbool.h>
+
+struct fdt_header
+{
     uint32_t magic;
     uint32_t totalsize;
     uint32_t off_dt_struct;
@@ -13,10 +18,8 @@ struct fdt_header {
     uint32_t size_dt_struct;
 };
 
-uint32_t big_to_little_endian(uint32_t big);
+bool validate_fdt(void *fdt_header_addr);
 
+struct fdt_header parse_header(void *fdt_headerd_addr);
 
-
-
-
- 
+#endif /* FDT_H */
