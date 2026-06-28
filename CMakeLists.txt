@@ -28,4 +28,10 @@ add_executable(Kernel kernel.c fdt.h fdt.c)
 set_target_properties(Kernel PROPERTIES LINK_DEPENDS "${LINKER_SCRIPT}" OUTPUT_NAME "Kernel.elf")
 target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule)
 
+# Strip out kernel.elf to kernel.bin for U-Boot
+add_custom_command(TARGET Kernel POST_BUILD
+	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:Kernel> ${CMAKE_BINARY_DIR}/kernel.bin
+	COMMENT "Generating kernel.bin for U-Boot"
+)
+
 
