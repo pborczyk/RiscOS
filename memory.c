@@ -6,8 +6,9 @@ void *DRAM_START = (void *)0x80000000;
 
 struct memory_chunk *first_free_memory_chunk;
 
-void init_allocator()
+void init_allocator(uint64_t dram_start, uint64_t dram_soze)
 {
+    DRAM_START = (void*) dram_start;
     first_free_memory_chunk = (struct memory_chunk *)DRAM_START;
     first_free_memory_chunk->chunk_size = 1024;
     first_free_memory_chunk->allocated_memory = 32;
