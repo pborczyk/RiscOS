@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+pkill -f "qemu-system-aarch64.*-s" 2>/dev/null || true
+sleep 0.5
+
 qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1G \
     -bios bin/uboot-tftp.bin \
     -netdev user,id=net0,tftp=build \
