@@ -22,11 +22,28 @@ add_compile_options(-ffreestanding -c -g -nostdlib -mstrict-align -mgeneral-regs
 add_library(MemoryModule	OBJECT memory.h memory.c)
 add_library(StdLibModule	OBJECT stdlib.h stdlib.c string.h string.c)
 
+add_library(LibFdt			OBJECT 	lib/libfdt/fdt_addresses.c
+									lib/libfdt/fdt_empty_tree.c
+									lib/libfdt/fdt_overlay.c
+									lib/libfdt/fdt_ro.c
+									lib/libfdt/fdt_rw.c
+									lib/libfdt/fdt_strerror.c
+									lib/libfdt/fdt_sw.c
+									lib/libfdt/fdt_wip.c
+									lib/libfdt/fdt.c
+									lib/libfdt/fdt.h
+									lib/libfdt/libfdt_env.h
+									lib/libfdt/libfdt_internal.h
+									lib/libfdt/libfdt.h)
+# so that the compiler can find the libfdt headers without having to specify relative path in every source file that uses it
+target_include_directories(LibFdt PRIVATE lib/libfdt/)
+
+
 set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/linker.ld")
 add_link_options(-T "${LINKER_SCRIPT}" -nostdlib)
-add_executable(Kernel kernel.c fdt.h fdt.c)
+add_executable(Kernel kernel.c)
 set_target_properties(Kernel PROPERTIES LINK_DEPENDS "${LINKER_SCRIPT}" OUTPUT_NAME "Kernel.elf")
-target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule)
+target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule LibFdt)
 
 # Strip out kernel.elf to kernel.bin for U-Boot
 add_custom_command(TARGET Kernel POST_BUILD

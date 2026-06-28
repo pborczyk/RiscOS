@@ -1,14 +1,22 @@
 #include "string.h"
-int strlen(char *str)
+size_t strlen(char *str)
 {
-    int size = 0;
-    int strpos = 0;
+    size_t size = 0;
+    size_t strpos = 0;
     while (str[strpos] != '\0')
     {
         size++;
         strpos++;
     }
     return size;
+}
+
+size_t strnlen(const char *s, size_t maxlen)
+{
+    size_t len = 0;
+    while (len < maxlen && s[len] != '\0')
+        len++;
+    return len;
 }
 
 void strrev(char *str)
@@ -63,7 +71,8 @@ int memcmp(const void *ptr1, const void *ptr2, size_t num)
     }
     return 0;
 }
-void *memmmove(void *destination, const void *source, size_t num)
+
+void *memmove(void *destination, const void *source, size_t num)
 {
     unsigned char *d = (unsigned char *)destination;
     const unsigned char *s = (const unsigned char *)source;
@@ -89,4 +98,40 @@ void *memmmove(void *destination, const void *source, size_t num)
         }
     }
     return destination;
+}
+void *memchr(const void *ptr, int value, size_t num)
+{
+    unsigned char char_val = value;
+    const unsigned char* char_start = ptr;
+    for(size_t i = 0; i < num; i++) {
+        if(char_start[i] == char_val) {
+            return (void*)(char_start + i);
+        }
+    }
+    return NULL;
+}
+char *strchr(const char *str, int c)
+{
+    unsigned int i = 0;
+    while (str[i] != '\0') {
+        if(str[i] == (char)c) {
+            return (char*)(str + i);
+        }
+        i++;
+    }
+    if(c == '\0') return (char*)(str + i);
+    return NULL;
+}
+char *strrchr(const char *str, int c)
+{
+    unsigned int i = 0;
+    char* last_occurence = NULL;
+    while (str[i] != '\0') {
+        if(str[i] == (char)c) {
+            last_occurence = (char*)(str + i);
+        }
+        i++;
+    }
+    if(c == '\0') return (char*)(str + i);
+    return last_occurence;
 }

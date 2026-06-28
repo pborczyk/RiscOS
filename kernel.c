@@ -1,17 +1,16 @@
 #include "stdlib.h"
 #include "memory.h"
 #include <stdint.h>
-#include "fdt.h"
+#include "lib/libfdt/libfdt.h"
+
 
 void kmain(void *fdt_addr)
 {
-     if (!validate_fdt(fdt_addr))
-     {
-          printf("Invalid FDT\n");
-          return;
+     if (fdt_check_header(fdt_addr) != 0) {
+        printf("Invalid device tree blob\n");
+        return;
      }
-     printf("FDT is valid\n");
-     struct fdt_header header = parse_header(fdt_addr);
-     printf("Memory allocator initialized \n");
+     printf("Device tree blob is valid\n");
+     
      printf("Hello world! %d\n", 11);
 }

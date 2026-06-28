@@ -7,5 +7,7 @@ char *itoa(int value, char *str, int base);
 char *utoa(unsigned int value, char *str, int base);
 void printf(const char *format, ...);
 void print(const char *str);
+char toupper(char c);
+unsigned long strtoul(const char *nptr, char **endptr, int base);
 
 #endif /* STDLIB_H */
