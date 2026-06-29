@@ -42,7 +42,7 @@ void kmain(const void *fdt_addr)
 
    uint64_t size = 0;
    // we are starting iteration for the size cell where address cell one ended
-   for (int j = addr_cells; j < size_cells; j++)
+   for (int j = addr_cells; j < addr_cells + size_cells; j++)
       size = (size << 32) | fdt32_to_cpu(entry[j]);
 
    printf("DRAM region detected, base=0x%x size=0x%x\n", base, size);
