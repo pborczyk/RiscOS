@@ -3,7 +3,7 @@ set(CMAKE_SYSTEM_NAME	  Generic)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(TOOLCHAIN_PREFIX    aarch64-elf-)
-set(COMPILER_DIRECTORY /opt/homebrew/opt/aarch64-elf-gcc/bin/)
+set(TOOLCHAIN_DIRECTORY /opt/homebrew/opt/aarch64-elf-gcc/bin/)
 set(BINUTILS_DIRECTORY /opt/homebrew/opt/aarch64-elf-binutils/bin/)
 
 set(CMAKE_C_COMPILER    "${TOOLCHAIN_DIRECTORY}${TOOLCHAIN_PREFIX}gcc")

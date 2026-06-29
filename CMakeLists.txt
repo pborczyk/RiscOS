@@ -36,13 +36,14 @@ add_library(LibFdt			OBJECT 	lib/libfdt/fdt_addresses.c
 									lib/libfdt/libfdt_internal.h
 									lib/libfdt/libfdt.h)
 # so that the compiler can find the libfdt headers without having to specify relative path in every source file that uses it
-target_include_directories(LibFdt PRIVATE lib/libfdt/)
+target_include_directories(LibFdt PRIVATE lib/libfdt/ ${CMAKE_SOURCE_DIR})
 
 
 set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/linker.ld")
 add_link_options(-T "${LINKER_SCRIPT}" -nostdlib)
 add_executable(Kernel kernel.c)
 set_target_properties(Kernel PROPERTIES LINK_DEPENDS "${LINKER_SCRIPT}" OUTPUT_NAME "Kernel.elf")
+target_include_directories(Kernel PRIVATE ${CMAKE_SOURCE_DIR})
 target_link_libraries(Kernel EntryPoint MemoryModule StdLibModule LibFdt)
 
 # Strip out kernel.elf to kernel.bin for U-Boot
