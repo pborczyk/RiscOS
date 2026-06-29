@@ -20,7 +20,8 @@ void kmain(const void *fdt_addr)
    int memory_node = fdt_path_offset(fdt_addr, "/memory");
    int len;
    const fdt32_t *reg = fdt_getprop(fdt_addr, memory_node, "reg", &len);
-   if (!reg) {
+   if (!reg)
+   {
       printf("Failed to read /memory reg property\n");
       return;
    }
@@ -28,11 +29,12 @@ void kmain(const void *fdt_addr)
    int region_cells = addr_cells + size_cells;
    size_t region_size = region_cells * sizeof(fdt32_t);
    int num_regions = len / region_size;
-   if(num_regions > 1) {
+   if (num_regions > 1)
+   {
       printf("Multiple memory regions not supported");
       return;
    }
-   const fdt32_t *entry = &reg;
+   const fdt32_t *entry = reg;
 
    uint64_t base = 0;
    for (int j = 0; j < addr_cells; j++)
@@ -44,6 +46,4 @@ void kmain(const void *fdt_addr)
       size = (size << 32) | fdt32_to_cpu(entry[j]);
 
    printf("DRAM region detected, base=0x%llx size=0x%llx\n", base, size);
-
-   
 }
