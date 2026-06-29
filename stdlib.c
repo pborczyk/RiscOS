@@ -22,9 +22,23 @@ char *itoa(int value, char *str, int base)
 {
   char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
                      '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  char *orig_str = str;
   if (base > 16)
   {
     return NULL;
+  }
+  if (value == 0)
+  {
+    *str = '0';
+    str++;
+    *str = '\0';
+    return orig_str;
+  }
+  if (value < 0)
+  {
+    value = -value;
+    *str = '-';
+    str++;
   }
   int str_pos = 0;
   while (value > 0)
@@ -35,16 +49,24 @@ char *itoa(int value, char *str, int base)
   }
   str[str_pos] = '\0';
   strrev(str);
-  return str;
+  return orig_str;
 }
 
 char *utoa(unsigned int value, char *str, int base)
 {
   char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
                      '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  char *orig_str = str;
   if (base > 16)
   {
     return NULL;
+  }
+  if (value == 0)
+  {
+    *str = '0';
+    str++;
+    *str = '\0';
+    return orig_str;
   }
   int str_pos = 0;
   while (value > 0)
@@ -55,7 +77,7 @@ char *utoa(unsigned int value, char *str, int base)
   }
   str[str_pos] = '\0';
   strrev(str);
-  return str;
+  return orig_str;
 }
 
 void printf(const char *format, ...)
@@ -120,11 +142,13 @@ void printf(const char *format, ...)
   __builtin_va_end(argp);
 }
 
-int index_of_char_(char element, char* array, size_t array_size) {
+int index_of_char_(char element, char *array, size_t array_size)
+{
   int i = 0;
   while (i < array_size)
   {
-    if(array[i] == element) {
+    if (array[i] == element)
+    {
       return i;
     }
     i++;
@@ -132,23 +156,27 @@ int index_of_char_(char element, char* array, size_t array_size) {
   return -1;
 }
 
-char toupper(char c) {
-  if(c >= 'a' && c <= 'z') return c - 32;
+char toupper(char c)
+{
+  if (c >= 'a' && c <= 'z')
+    return c - 32;
   return c;
 }
 
 unsigned long strtoul(const char *str, char **first_unknown_char, int base)
 {
-    char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
+  char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
                      '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-    unsigned long result = 0;
-    for(unsigned int i = 0; str[i] != '\0'; i++) {
-      int index = index_of_char_(toupper(str[i]), digits, 16);
-      if(index < 0 || index >= base) {
-        *first_unknown_char = str + i;
-        return 0;
-      }
-      result = result * base + index;
+  unsigned long result = 0;
+  for (unsigned int i = 0; str[i] != '\0'; i++)
+  {
+    int index = index_of_char_(toupper(str[i]), digits, 16);
+    if (index < 0 || index >= base)
+    {
+      *first_unknown_char = str + i;
+      return 0;
     }
-    return result;
+    result = result * base + index;
+  }
+  return result;
 }

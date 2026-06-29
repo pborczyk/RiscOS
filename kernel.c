@@ -45,5 +45,5 @@ void kmain(const void *fdt_addr)
    for (int j = addr_cells; j < size_cells; j++)
       size = (size << 32) | fdt32_to_cpu(entry[j]);
 
-   printf("DRAM region detected, base=0x%llx size=0x%llx\n", base, size);
+   printf("DRAM region detected, base=0x%x size=0x%x\n", base, size);
 }
